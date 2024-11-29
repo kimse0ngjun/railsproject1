@@ -1,0 +1,48 @@
+<p id="notice"><%= notice %></p>
+
+<!-- header를 flex container로 설정 -->
+<div class="ui header">
+  <!-- 왼쪽: YOUTUBE -->
+  <div class="ui youtube">
+    <i class="youtube icon"></i>
+  </div>
+
+  <!-- 가운데: 검색창 -->
+  <div class="ui fluid icon input">
+    <input type="text" placeholder="검색">
+    <i class="search icon"></i>
+  </div>
+
+  <!-- 오른쪽: 이미지 -->
+  <img class="ui medium circular image" src="/images/wireframe/square-image.png">
+</div>
+
+<!-- 테이블 스타일 적용 -->
+<table class="ui celled table">
+
+  <tbody>
+    <% @mains.each do |main| %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<!-- New Main 버튼 스타일 적용 -->
+<%= link_to 'New Main', new_main_path, class: "ui green button" %>
+
+<!-- 메뉴 (테이블 외부) -->
+<div class="ui secondary vertical menu">
+  <div class="active item">
+    <i class="home icon"></i>
+    <%= link_to '홈', root_path, class: 'ui item' %>
+  </div>
+  <div class="active item">
+    <i class="home icon"></i>
+    <%= link_to 'shorts', '/shorts', class: 'ui item' %>
+  </div>
+  <div class="active item">
+    <i class="home icon"></i>
+    <%= link_to 'Destroy', '#', class: 'ui item' %>
+  </div>
+</div>

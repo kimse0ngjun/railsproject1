@@ -1,15 +1,71 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+// app/assets/stylesheets/application.scss
+/* 글로벌 스타일 */
+/* app/assets/stylesheets/application.scss */
+@import 'semantic/semantic.min';
+
+* {
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+/* 부모 요소에 flexbox 사용 */
+.ui.header {
+  display: flex;                  /* 플렉스 컨테이너 설정 */
+  justify-content: space-between; /* 왼쪽, 중앙, 오른쪽 요소 배치 */
+  align-items: center;            /* 세로 중앙 정렬 */
+  width: 100%;                    /* 화면 가득 차게 설정 */
+  position: relative;
+}
+
+/* 왼쪽: YOUTUBE */
+.ui.header > .ui.youtube {
+  flex: 0 0 auto;                 /* 크기 고정 */
+  margin-left: 10px;              /* 왼쪽 여백 */
+}
+
+/* 가운데: 검색창 */
+.ui.header > .ui.fluid.icon.input {
+  flex: 1;                        /* 가운데 요소가 남은 공간을 채우도록 설정 */
+  text-align: center;             /* 입력창 중앙 정렬 */
+  max-width: 500px;               /* 최대 너비 제한 */
+  height: 40px;                   /* 높이 설정 */
+}
+
+/* 오른쪽: 이미지 */
+.ui.header > .ui.medium.circular.image {
+  flex: 0 0 auto;                 /* 크기 고정 */
+  margin-right: 10px;             /* 오른쪽 여백 */
+  width: 20px;
+  height: 20px;
+}
+
+/* 비디오 (YOUTUBE) */
+.ui.youtube {
+  max-width: 100px;               /* 최대 너비 제한 */
+  height: auto;
+  max-height: 400px;              /* 최대 높이 제한 */
+}
+
+.ui.secondary.vertical.menu {
+  width: 200px; /* 메뉴의 고정 너비 */
+}
+
+.ui.secondary.vertical.menu .item {
+  height: 50px; /* 모든 항목의 높이를 동일하게 설정 */
+  display: flex;
+  align-items: center; /* 수직 가운데 정렬 */
+}
+
+.ui.secondary.vertical.menu .item i.icon {
+  margin-right: 10px; /* 아이콘과 텍스트 간격 설정 */
+}
+
+.ui.secondary.vertical.menu .item span,
+.ui.secondary.vertical.menu .item a {
+  flex-grow: 1; /* 텍스트 부분을 아이콘 옆에 균등하게 배치 */
+  text-align: left; /* 텍스트를 왼쪽 정렬 */
+  line-height: 1.5; /* 텍스트의 읽기 가독성 향상 */
+}
+.ui.item{
+   width:150px;
+}

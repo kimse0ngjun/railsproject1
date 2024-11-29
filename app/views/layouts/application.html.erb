@@ -5,11 +5,29 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <!-- 기존 애셋 파일 로드 -->
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <!-- Semantic UI CSS 파일 로드 -->
+    <link rel="stylesheet" href="/semantic/semantic.min.css">
   </head>
 
   <body>
+	  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Semantic UI JavaScript 파일 로드 -->
+    <script src="/semantic/semantic.min.js"></script>
+
+    <!-- turbolinks:load 이벤트에서 Semantic UI 초기화 -->
+    <script>
+      document.addEventListener('turbolinks:load', function() {
+        // 드롭다운 초기화
+        $('.ui.dropdown').dropdown();
+        // 모달 초기화 (필요시)
+        $('.ui.modal').modal();
+      });
+    </script>
+
     <%= yield %>
   </body>
 </html>
