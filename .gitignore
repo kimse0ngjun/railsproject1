@@ -1,0 +1,18 @@
+# node_modules 폴더 전체 제외 
+node_modules/ 
+# 민감한 정보가 담긴 PEM 키 파일 제외 
+*.pem 
+# 추가로 Rails 프로젝트에서 자주 제외되는 파일들 
+/log/* 
+/tmp/* 
+/coverage/* 
+/db/*.sqlite3 
+/db/*.sqlite3-journal 
+/public/assets 
+.byebug_history 
+.bundle 
+/config/master.key 
+/config/credentials.yml.enc 
+# IDE 관련 파일 제외 (선택 사항) 
+.idea/ 
+.vscode/
