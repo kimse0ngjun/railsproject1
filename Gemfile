@@ -24,7 +24,13 @@ gem 'jbuilder', '~> 2.7'
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'httparty'
-gem 'dotenv-rails'
+gem 'dotenv-rails', groups: [:development, :test]
+
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
