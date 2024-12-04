@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+<<<<<<< HEAD
   get 'pages/home'
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
@@ -16,4 +17,16 @@ Rails.application.routes.draw do
     # 댓글 생성 라우트 추가
     resources :comments, only: [:create]
   end
+=======
+  # 로그인
+  get 'login', to: 'sessions#new', as: 'new_session'  # 로그인 폼
+  post '/login', to: 'sessions#create', as: 'session'   # 로그인 처리
+  
+  # 회원가입
+  resources :mains
+  resources :categories, only: [:create]
+
+  # 루트 경로
+  root 'mains#index'
+>>>>>>> develop-sw
 end
