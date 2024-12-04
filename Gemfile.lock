@@ -58,9 +58,9 @@ GEM
       zeitwerk (~> 2.2, >= 2.2.2)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
-    base64 (0.2.0)
     autoprefixer-rails (10.4.19.0)
       execjs (~> 2)
+    base64 (0.2.0)
     bcrypt (3.1.20)
     bindex (0.8.1)
     bootsnap (1.4.6)
@@ -92,6 +92,7 @@ GEM
       dotenv (= 2.8.1)
       railties (>= 3.2)
     erubi (1.9.0)
+    execjs (2.10.0)
     faraday (2.8.1)
       base64
       faraday-net_http (>= 2.0, < 3.1)
@@ -104,11 +105,6 @@ GEM
     httparty (0.21.0)
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
-    erubi (1.9.0)
-    execjs (2.10.0)
-    ffi (1.13.1)
-    globalid (0.4.2)
-      activesupport (>= 4.2.0)
     i18n (1.8.3)
       concurrent-ruby (~> 1.0)
     jbuilder (2.10.0)
@@ -158,10 +154,6 @@ GEM
     omniauth-rails_csrf_protection (1.0.2)
       actionpack (>= 4.2)
       omniauth (~> 2.0)
-    orm_adapter (0.5.0)
-    nio4r (2.5.2)
-    nokogiri (1.10.10)
-      mini_portile2 (~> 2.4.0)
     orm_adapter (0.5.0)
     popper_js (2.11.8)
     public_suffix (4.0.5)
@@ -278,6 +270,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap (>= 1.4.2)
+  bootstrap (~> 5.3.3)
   byebug
   capybara (>= 2.15)
   devise
@@ -291,14 +284,6 @@ DEPENDENCIES
   puma (~> 4.1)
   rails (~> 6.0.2)
   rails-i18n
-  bootstrap (~> 5.3.3)
-  byebug
-  capybara (>= 2.15)
-  devise
-  jbuilder (~> 2.7)
-  listen (>= 3.0.5, < 3.2)
-  puma (~> 4.1)
-  rails (~> 6.0.2)
   sass-rails (>= 6)
   selenium-webdriver
   spring

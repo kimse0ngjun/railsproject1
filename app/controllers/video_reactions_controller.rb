@@ -12,7 +12,10 @@ class VideoReactionsController < ApplicationController
       @video.video_reactions.find_by(user: current_user, reaction_type: 0)&.destroy  # 기존 싫어요 취소
     end
 
-    respond_to_format
+    # 좋아요, 싫어요 수를 업데이트한 후 JS로 응답
+    respond_to do |format|
+      format.js { render 'videos/update_like_dislike_counts' }  # 좋아요/싫어요 수를 업데이트하는 JS 파일 렌더링
+    end
   end
 
   # 싫어요
@@ -26,7 +29,10 @@ class VideoReactionsController < ApplicationController
       @video.video_reactions.find_by(user: current_user, reaction_type: 1)&.destroy  # 기존 좋아요 취소
     end
 
-    respond_to_format
+    # 좋아요, 싫어요 수를 업데이트한 후 JS로 응답
+    respond_to do |format|
+      format.js { render 'videos/update_like_dislike_counts' }  # 좋아요/싫어요 수를 업데이트하는 JS 파일 렌더링
+    end
   end
 
   private

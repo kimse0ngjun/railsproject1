@@ -33,6 +33,12 @@ ActiveRecord::Schema.define(version: 2024_12_03_154916) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "comments", force: :cascade do |t|
     t.text "content"
     t.integer "user_id", null: false
@@ -41,6 +47,14 @@ ActiveRecord::Schema.define(version: 2024_12_03_154916) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_comments_on_user_id"
     t.index ["video_id"], name: "index_comments_on_video_id"
+  end
+
+  create_table "mains", force: :cascade do |t|
+    t.string "name"
+    t.integer "age"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "category_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -91,19 +105,4 @@ ActiveRecord::Schema.define(version: 2024_12_03_154916) do
   add_foreign_key "comments", "videos"
   add_foreign_key "video_reactions", "users"
   add_foreign_key "video_reactions", "videos"
-ActiveRecord::Schema.define(version: 2024_12_01_143114) do
-
-  create_table "categories", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "mains", force: :cascade do |t|
-    t.string "name"
-    t.integer "age"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "category_id"
-  end
 end

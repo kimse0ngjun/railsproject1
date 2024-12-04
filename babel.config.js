@@ -66,6 +66,19 @@ module.exports = function(api) {
         {
           async: false
         }
+      ],
+      // 여기에 loose 옵션을 일관되게 설정한 추가 플러그인들
+      [
+        '@babel/plugin-transform-private-methods',
+        {
+          loose: true // 여기서도 loose를 true로 설정
+        }
+      ],
+      [
+        '@babel/plugin-transform-private-property-in-object',
+        {
+          loose: true // 여기서도 loose를 true로 설정
+        }
       ]
     ].filter(Boolean)
   }

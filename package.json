@@ -2,19 +2,13 @@
   "name": "goorm_rails_app",
   "private": true,
   "dependencies": {
-<<<<<<< HEAD
-=======
     "@popperjs/core": "^2.11.8",
->>>>>>> develop-sw
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "4.2.2",
-<<<<<<< HEAD
-=======
     "bootstrap": "^5.3.3",
     "popper.js": "^1.16.1",
->>>>>>> develop-sw
     "turbolinks": "^5.2.0"
   },
   "version": "0.1.0",
