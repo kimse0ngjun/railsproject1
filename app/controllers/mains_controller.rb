@@ -1,10 +1,12 @@
 class MainsController < ApplicationController
   before_action :set_main, only: [:show, :edit, :update, :destroy]
+  before_action :set_categories, only: [:new, :edit, :create, :update]
 
   # GET /mains
   # GET /mains.json
   def index
     @mains = Main.all
+	  @categories = Category.all # 드롭다운에 사용할 데이터 로드
   end
 
   # GET /mains/1
@@ -67,8 +69,12 @@ class MainsController < ApplicationController
       @main = Main.find(params[:id])
     end
 
+    def set_categories
+      @categories = Category.all # 드롭다운 항목 준비
+    end
+
     # Only allow a list of trusted parameters through.
     def main_params
-      params.require(:main).permit(:name, :age)
+      params.require(:main).permit(:name, :age, :category_id)
     end
 end
