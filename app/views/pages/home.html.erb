@@ -10,3 +10,22 @@
   <%= link_to "Login", new_user_session_path %>
   <%= link_to "Create Account", new_user_registration_path %>
 <% end %>
+
+<h2>최근 검색 영상</h2>
+<div>
+  <% @videos.each do |video| %>
+    <div>
+      <h3><%= link_to video.title, video_path(video) %></h3>
+      <p>업로드 날짜: <%= time_ago_in_words(video.created_at) %> 전</p>
+      <p>좋아요: <%= video.likes%>, 싫어요: <%= video.dislikes %></p>
+    </div>
+  <% end %>
+</div>
+
+<h2>영상 검색</h2>
+  <%= form_with url: search_videos_path, method: :get, local: true do %>
+  <%= text_field_tag :query, params[:query], placeholder: "Search videos" %>
+  <%= submit_tag "Search" %>
+<% end %>
+
+

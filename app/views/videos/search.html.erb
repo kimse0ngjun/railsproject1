@@ -1,0 +1,26 @@
+<h2>검색 결과</h2>
+
+<%= form_with url: search_videos_path, method: :get, local: true do %>
+  <%= text_field_tag :query, params[:query], placeholder: "Search videos" %>
+  <%= submit_tag "Search" %>
+<% end %>
+
+<% if @videos.any? %>
+  <% @videos.each do |video| %>
+    <div class="video">
+      <h3><%= video.title %></h3>
+      <p><%= video.description.to_s.truncate(100) %></p>
+      <%= link_to '상세보기', video_path(video) %>
+    </div>
+  <% end %>
+<% else %>
+  <p>검색 결과가 없습니다. 대신 추천 영상을 확인해보세요:</p>
+  
+  <% @recommended_videos.each do |video| %>
+    <div class="recommended-video">
+      <h3><%= video.title %></h3>
+      <p><%= video.description.to_s.truncate(100) %></p>
+      <%= link_to '상세보기', video_path(video) %>
+    </div>
+  <% end %>
+<% end %>

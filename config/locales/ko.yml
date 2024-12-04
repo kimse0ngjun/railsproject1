@@ -1,0 +1,30 @@
+ko:
+  time:
+    formats:
+      default: "%Y년 %m월 %d일 %H:%M"
+    distance_in_words:
+      half_a_minute: "30초 전"
+      minute: "1분"
+      minutes:
+        one: "1분"
+        other: "%{count}분"
+      hour: "1시간"
+      hours:
+        one: "1시간"
+        other: "%{count}시간"
+      day: "1일"
+      days:
+        one: "1일"
+        other: "%{count}일"
+      week: "1주"
+      weeks:
+        one: "1주"
+        other: "%{count}주"
+      month: "1개월"
+      months:
+        one: "1개월"
+        other: "%{count}개월"
+      year: "1년"
+      years:
+        one: "1년"
+        other: "%{count}년"

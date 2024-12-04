@@ -1,0 +1,66 @@
+<h1><%= @video.title %></h1>
+<p><%= @video.description %></p>
+
+<!-- 업로드된 동영상 표시 -->
+<% if @video.uploaded_video.attached? %>
+  <video width="640" height="360" controls>
+    <source src="<%= url_for(@video.uploaded_video) %>" type="video/mp4">
+    브라우저가 비디오 태그를 지원하지 않습니다.
+  </video>
+<% elsif @video.video_url.present? %>
+  <!-- 유튜브 동영상 표시 -->
+  <iframe 
+    width="640" 
+    height="360" 
+    src="https://www.youtube.com/embed/<%= youtube_video_id(@video.video_url) %>" 
+    frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen>
+  </iframe>
+<% else %>
+  <p>동영상이 없습니다.</p>
+<% end %>
+
+<!-- 업로드 날짜 -->
+<p>업로드 날짜: <%= time_ago_in_words(@video.created_at) %> 전</p>
+
+<!-- 조회수 표시 -->
+<p>조회수: <%= @video.views %>회</p>
+
+<!-- 좋아요 / 싫어요 -->
+<p>좋아요: <span id="likes-count"><%= @video.likes %></span> | 싫어요: <span id="dislikes-count"><%= @video.dislike %></span></p>
+
+<%= button_to '좋아요', like_video_path(@video), method: :patch, remote: true, class: "like-button", id: 'like-button' %>
+<%= button_to '싫어요', dislike_video_path(@video), method: :patch, remote: true, class: "dislike-button", id: 'dislike-button' %>
+
+<%= link_to '목록으로 돌아가기', videos_path %>
+<%= link_to '홈으로 돌아가기', root_path %>
+
+<hr>
+
+<!-- 댓글 목록 -->
+<h2>댓글</h2>
+<% if @comments.any? %>
+  <ul>
+    <% @comments.each do |comment| %>
+      <li>
+        <strong><%= comment.user.full_name %>:</strong> <%= comment.content %> 
+        <small><%= time_ago_in_words(comment.created_at) %> 전</small>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>댓글이 없습니다. 첫 번째 댓글을 남겨보세요!</p>
+<% end %>
+
+<!-- 댓글 작성 폼 -->
+<h3>댓글 작성</h3>
+<%= form_with(model: [@video, @new_comment], local: true) do |form| %>
+  <div class="field">
+    <%= form.label :content, "댓글 내용" %>
+    <%= form.text_area :content, rows: 3 %>
+  </div>
+  <div class="actions">
+    <%= form.submit "댓글 남기기" %>
+  </div>
+<% end %>

@@ -27,9 +27,13 @@ gem 'httparty'
 gem 'dotenv-rails', groups: [:development, :test]
 
 gem 'devise'
+# 구글
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
+# 한글 패치
+gem 'rails-i18n'
+
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

@@ -1,0 +1,55 @@
+<h1>업로드 영상</h1>
+
+<%= form_with(model: @video, local: true) do |form| %>
+  <% if @video.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@video.errors.count, "error") %> prohibited this video from being saved:</h2>
+      <ul>
+        <% @video.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :video_url %>
+    <%= form.text_field :video_url %>
+  </div>
+
+  <div class="field">
+    <%= form.label :subscription %>
+    <%= form.check_box :subscription %>
+  </div>
+
+  <div class="field">
+    <%= form.label :video_length %>
+    <%= form.number_field :video_length %>
+  </div>
+
+  <!-- 영상 파일 업로드 필드 -->
+  <div class="field">
+    <%= form.label :uploaded_video, "영상 파일 업로드" %>
+    <%= form.file_field :uploaded_video %>
+  </div>
+
+  <!-- 썸네일 이미지 업로드 필드 -->
+  <div class="field">
+    <%= form.label :thumbnail_image, "썸네일 업로드" %>
+    <%= form.file_field :thumbnail_image %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Save" %>
+  </div>
+<% end %>

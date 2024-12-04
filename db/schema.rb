@@ -10,7 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_11_29_182433) do
+ActiveRecord::Schema.define(version: 2024_12_03_154916) do
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.integer "record_id", null: false
+    t.integer "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text "content"
+    t.integer "user_id", null: false
+    t.integer "video_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_comments_on_user_id"
+    t.index ["video_id"], name: "index_comments_on_video_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -28,4 +59,36 @@ ActiveRecord::Schema.define(version: 2024_11_29_182433) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "video_reactions", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "video_id", null: false
+    t.integer "reaction_type", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id", "video_id"], name: "index_video_reactions_on_user_id_and_video_id", unique: true
+    t.index ["user_id"], name: "index_video_reactions_on_user_id"
+    t.index ["video_id"], name: "index_video_reactions_on_video_id"
+  end
+
+  create_table "videos", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.boolean "subscription"
+    t.string "video_url"
+    t.integer "likes"
+    t.integer "dislike"
+    t.integer "video_length"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "likes_count"
+    t.integer "dislikes_count"
+    t.string "youtube_video_url"
+    t.integer "views", default: 0, null: false
+  end
+
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "comments", "users"
+  add_foreign_key "comments", "videos"
+  add_foreign_key "video_reactions", "users"
+  add_foreign_key "video_reactions", "videos"
 end

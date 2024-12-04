@@ -1,5 +1,5 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
-    #구글 소셜 로그인
+    # 구글 소셜 로그인
   def google_oauth2
     @user = User.from_omniauth(request.env['omniauth.auth'])
     if @user.persisted?

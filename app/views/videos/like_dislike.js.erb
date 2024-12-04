@@ -1,0 +1,16 @@
+// app/views/videos/like_dislike.js.erb
+document.getElementById('likes-count').innerText = "<%= @video.likes %>";
+document.getElementById('dislikes-count').innerText = "<%= @video.dislikes %>";
+
+// 버튼 상태 업데이트
+<% if @video.video_reactions.exists?(user: current_user, reaction_type: :like) %>
+  document.getElementById('like-button').classList.add('active');
+<% else %>
+  document.getElementById('like-button').classList.remove('active');
+<% end %>
+
+<% if @video.video_reactions.exists?(user: current_user, reaction_type: :dislike) %>
+  document.getElementById('dislike-button').classList.add('active');
+<% else %>
+  document.getElementById('dislike-button').classList.remove('active');
+<% end %>
