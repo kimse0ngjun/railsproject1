@@ -1,0 +1,79 @@
+/* Header 스타일 */
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.youtube-logo i {
+  font-size: 36px;
+  color: #ff0000;
+}
+
+.youtube-logo span {
+  font-size: 24px;
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.search-container {
+  flex-grow: 1;
+  max-width: 600px;
+  margin: 0 20px;
+}
+
+.input-group {
+  width: 100%;
+}
+
+.user-dropdown {
+  display: flex;
+  align-items: center;
+}
+
+.user-dropdown button {
+	border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 18px;
+}
+
+/* 사이드바 스타일 */
+.sidebar {
+  width: 250px;
+  background-color: #f8f8f8;
+  padding-top: 20px;
+}
+
+.nav-item {
+  margin-bottom: 15px;
+}
+
+.nav-item i {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+.nav-link {
+  color: #333;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.nav-link:hover {
+  color: #ff0000;
+}
+
+/* Main content */
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+}

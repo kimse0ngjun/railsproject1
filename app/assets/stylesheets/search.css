@@ -1,0 +1,46 @@
+/* 기본 레이아웃 및 중앙 정렬 */
+.search-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.search-results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.video, .recommended-video {
+  max-width: 600px;
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.video h3, .recommended-video h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.video p, .recommended-video p {
+  font-size: 1rem;
+  margin-bottom: 15px;
+}
+
+.btn-info {
+  background-color: #17a2b8;
+  color: white;
+}
+
+.btn-info:hover {
+  background-color: #138496;
+}
+
+.text-center {
+  text-align: center;
+}

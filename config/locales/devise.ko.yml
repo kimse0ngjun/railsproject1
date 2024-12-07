@@ -1,0 +1,8 @@
+ko:
+  devise:
+    failure:
+      user:
+        unauthenticated: "로그인 또는 회원가입이 필요합니다."
+    sessions:
+      signed_in: "로그인에 성공했습니다."
+      signed_out: "로그아웃에 성공했습니다."
