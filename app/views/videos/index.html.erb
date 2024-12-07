@@ -5,6 +5,7 @@
     <h2><%= video.title %></h2>
     <p><%= video.video_url %></p>
     <p><%= video.youtube_video_url %></p> <!-- youtube_video_url 출력 -->
+	  <%= link_to '상세보기', video_path(video) %>
   </div>
 <% end %>
 <%= link_to '홈으로 돌아가기', root_path %> 

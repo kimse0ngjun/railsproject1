@@ -21,6 +21,7 @@
   <p>동영상이 없습니다.</p>
 <% end %>
 
+
 <!-- 업로드 날짜 -->
 <p>업로드 날짜: <%= time_ago_in_words(@video.created_at) %> 전</p>
 
@@ -28,11 +29,10 @@
 <p>조회수: <%= @video.views %>회</p>
 
 <!-- 좋아요 / 싫어요 -->
-<p>좋아요: <span id="likes-count"><%= @video.video_reactions.where(reaction_type: 1).count %></span> | 
-   싫어요: <span id="dislikes-count"><%= @video.video_reactions.where(reaction_type: 0).count %></span></p>
+<p>좋아요: <span id="likes-count"><%= @video.likes %></span> | 싫어요: <span id="dislikes-count"><%= @video.dislike %></span></p>
 
-<%= button_to '좋아요', like_video_path(@video), method: :patch, remote: true, class: "like-button", id: 'like-button' %>
-<%= button_to '싫어요', dislike_video_path(@video), method: :patch, remote: true, class: "dislike-button", id: 'dislike-button' %>
+<%= button_to '좋아요', like_video_path(@video), method: :patch, class: "like-button" %>
+<%= button_to '싫어요', dislike_video_path(@video), method: :patch, class: "dislike-button" %>
 
 <%= link_to '목록으로 돌아가기', videos_path %>
 <%= link_to '홈으로 돌아가기', root_path %>

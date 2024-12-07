@@ -1,0 +1,18 @@
+/* 화면 중앙 정렬 */
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* 화면 전체 높이 */
+  padding: 20px; /* 여백 추가 */
+}
+
+/* 카드 스타일 */
+.signup-card {
+  width: 25rem; /* 카드 너비 */
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}

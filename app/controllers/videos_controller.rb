@@ -1,5 +1,6 @@
 class VideosController < ApplicationController
   before_action :set_video, only: [:show, :edit, :update, :destroy, :like, :dislike]
+  skip_before_action :authenticate_user!, only: [:search, :index, :new, :show] 
 
   # 영상 목록
   def index
@@ -24,13 +25,20 @@ class VideosController < ApplicationController
 
   # 영상 업로드
   def create
-    @video = Video.new(video_params)
-    if @video.save
-      redirect_to @video, notice: "영상이 성공적으로 업로드 되었습니다."
+  @video = Video.new(video_params)
+  if @video.save
+    if @video.uploaded_video.attached?
+      Rails.logger.info "파일이 성공적으로 업로드되었습니다."
     else
-      render :new
+      Rails.logger.error "파일 업로드에 실패했습니다."
+    end
+     redirect_to @video, notice: "영상이 성공적으로 업로드 되었습니다."
+    else
+     render :new
     end
   end
+
+
 
   # 영상 수정 폼
   def edit

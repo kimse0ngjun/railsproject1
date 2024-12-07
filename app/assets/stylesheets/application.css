@@ -15,6 +15,11 @@
  */
 /* 글로벌 스타일 */
 @import url('bootstrap.css'); /* 부트스트랩의 CSS를 직접 링크 */
+@import "login";
+@import "signup";
+@import "home";
+@import "search";
+@import "video";
 * {
     margin: 0px;
     box-sizing: border-box;
@@ -144,3 +149,4 @@
   width: 100%;                    /* 부모 컨테이너에 맞게 늘림 */
   height: 40px;                   /* 검색창 높이 */
 }
+

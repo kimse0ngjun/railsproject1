@@ -28,3 +28,7 @@ ko:
       years:
         one: "1년"
         other: "%{count}년"
+  devise:
+    failure:
+      user:
+        unauthenticated: "로그인이 필요합니다."

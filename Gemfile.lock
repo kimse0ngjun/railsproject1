@@ -128,6 +128,7 @@ GEM
     mini_portile2 (2.4.0)
     minitest (5.14.1)
     msgpack (1.3.3)
+    multi_json (1.15.0)
     multi_xml (0.6.0)
     nio4r (2.5.2)
     nokogiri (1.10.10)
@@ -234,6 +235,8 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     sqlite3 (1.4.2)
+    streamio-ffmpeg (3.0.2)
+      multi_json (~> 1.8)
     thor (1.0.1)
     thread_safe (0.3.6)
     tilt (2.0.10)
@@ -289,6 +292,7 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   sqlite3 (~> 1.4)
+  streamio-ffmpeg
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 3.3.0)

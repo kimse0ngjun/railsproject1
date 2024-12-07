@@ -35,7 +35,8 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
 # 한글 패치
 gem 'rails-i18n'
-
+# ffmpeg 명령어 
+gem 'streamio-ffmpeg'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

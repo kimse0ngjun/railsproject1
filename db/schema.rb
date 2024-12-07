@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_12_03_154916) do
+ActiveRecord::Schema.define(version: 2024_12_05_174124) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(version: 2024_12_03_154916) do
     t.integer "dislikes_count"
     t.string "youtube_video_url"
     t.integer "views", default: 0, null: false
+    t.string "youtube_thumbnail_url"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

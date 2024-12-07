@@ -1,26 +1,64 @@
-<h2>검색 결과</h2>
+<h2 class="text-center">검색 결과</h2>
 
-<%= form_with url: search_videos_path, method: :get, local: true do %>
-  <%= text_field_tag :query, params[:query], placeholder: "Search videos" %>
-  <%= submit_tag "Search" %>
+<%= form_with url: search_videos_path, method: :get, local: true, class: "search-form" do %>
+  <div class="input-group mb-3">
+    <%= text_field_tag :query, params[:query], placeholder: "Search videos", class: "form-control" %>
+    <div class="input-group-append">
+      <%= submit_tag "Search", class: "btn btn-primary" %>
+    </div>
+  </div>
 <% end %>
 
-<% if @videos.any? %>
-  <% @videos.each do |video| %>
-    <div class="video">
-      <h3><%= video.title %></h3>
-      <p><%= video.description.to_s.truncate(100) %></p>
-      <%= link_to '상세보기', video_path(video) %>
-    </div>
+<div class="search-results">
+  <% if @videos.any? %>
+    <% @videos.each do |video| %>
+      <div class="video mb-4">
+        <div class="row align-items-center">
+          <!-- 썸네일 이미지 -->
+          <div class="col-md-3">
+            <% if video.thumbnail_image.attached? %>
+              <%= image_tag url_for(video.thumbnail_image), alt: video.title, class: "img-fluid rounded video-thumbnail" %>
+            <% else %>
+              <img src="https://via.placeholder.com/120x90?text=No+Thumbnail" alt="No Thumbnail" class="img-fluid rounded video-thumbnail">
+            <% end %>
+          </div>
+          <!-- 비디오 정보 -->
+          <div class="col-md-9">
+            <h3><%= video.title %></h3>
+            <p><%= video.description.to_s.truncate(100) %></p>
+            <%= link_to '상세보기', video_path(video), class: 'btn btn-info' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <p>검색 결과가 없습니다. 대신 추천 영상을 확인해보세요:</p>
+
+    <% if @recommended_videos.any? %>
+      <div class="recommended-videos">
+        <% @recommended_videos.each do |video| %>
+          <div class="recommended-video mb-4">
+            <div class="row align-items-center">
+              <!-- 추천 영상 썸네일 -->
+              <div class="col-md-3">
+                <% if video.thumbnail_image.attached? %>
+                  <%= image_tag url_for(video.thumbnail_image), alt: video.title, class: "img-fluid rounded video-thumbnail" %>
+                <% else %>
+                  <img src="https://via.placeholder.com/120x90?text=No+Thumbnail" alt="No Thumbnail" class="img-fluid rounded video-thumbnail">
+                <% end %>
+              </div>
+              <!-- 추천 비디오 정보 -->
+              <div class="col-md-9">
+                <h3><%= video.title %></h3>
+                <p><%= video.description.to_s.truncate(100) %></p>
+                <%= link_to '상세보기', video_path(video), class: 'btn btn-info' %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p>추천 영상이 없습니다.</p>
+    <% end %>
   <% end %>
-<% else %>
-  <p>검색 결과가 없습니다. 대신 추천 영상을 확인해보세요:</p>
-  
-  <% @recommended_videos.each do |video| %>
-    <div class="recommended-video">
-      <h3><%= video.title %></h3>
-      <p><%= video.description.to_s.truncate(100) %></p>
-      <%= link_to '상세보기', video_path(video) %>
-    </div>
-  <% end %>
-<% end %>
+</div>
