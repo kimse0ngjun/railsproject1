@@ -10,7 +10,15 @@
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
   z-index: 1000;
+  transition: left 0.3s ease; /* 부드러운 애니메이션 */
 }
+
+/* 기본적으로 사이드바 숨기기 (홈 화면) */
+.sidebar.hidden {
+  left: -250px; /* 사이드바 숨기기 */
+  transition: left 0.3s ease; /* 부드러운 애니메이션 */
+}
+
 
 .nav {
   padding-left: 10px;
@@ -94,13 +102,6 @@ video, iframe {
   border-radius: 4px;
 }
 
-.like-button:hover {
-  background-color: blue; /* 좋아요 버튼 호버 효과 */
-}
-
-.dislike-button:hover {
-  background-color: #e60000; /* 싫어요 버튼 호버 효과 */
-}
 
 /* 댓글 작성 및 리스트 스타일 */
 .list-group-item {
@@ -147,10 +148,38 @@ video, iframe {
   border-radius: 4px;
   border: 1px solid #ddd;
 }
+
 .comment-content {
   display: block;
   max-width: 300px; /* 원하는 최대 너비 설정 */
   word-wrap: break-word;  /* 길이가 넘을 때 자동 줄 바꿈 */
   word-break: break-word; /* 긴 단어도 자동으로 줄 바꿈 */
   overflow-wrap: break-word; /* 글자가 넘치면 자동으로 줄 바꿈 */
+}
+
+.comment-section {
+  margin-right: 300px;
+}
+
+.youtube-logo{
+	width:180px;
+}
+.youtube-logo-img {
+  width: 100%; /* 원하는 크기 설정 */
+  height: auto; /* 비율에 맞게 높이 자동 조절 */
+}
+
+.like-button-img, .dislike-button-img {
+  width: 30px; /* 원하는 크기 */
+  height: auto; /* 비율에 맞게 자동 조정 */
+	margin-top:-25px;
+	border: 2px solid #ccc; /* 네모 모양 테두리 */
+  border-radius: 4px; /* 약간의 둥근 모서리 */
+}
+
+.like-button, .dislike-button {
+  background: none; /* 버튼 기본 배경 제거 */
+  border: none; /* 버튼 테두리 제거 */
+  padding: 0; /* 이미지 주변 여백 제거 */
+  cursor: pointer; /* 클릭 가능한 상태로 변경 */
 }
