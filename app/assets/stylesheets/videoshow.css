@@ -1,0 +1,156 @@
+/* Sidebar 스타일 */
+.sidebar {
+  position: fixed;
+  top: 100px;
+  left: 0;
+  height: 100vh;
+  width: 250px;
+  background-color: #f8f8f8;
+  padding-top: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.nav {
+  padding-left: 10px;
+}
+
+.nav-link {
+  display: block;
+  padding: 10px 15px;
+  color: #333;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.nav-link:hover {
+  background-color: #e6e6e6;
+  color: #ff0000;
+}
+
+/* 비디오와 iframe 스타일 */
+video, iframe {
+  max-width: 100%;
+  margin-top: 30px;
+}
+
+/* 메인 콘텐츠 스타일 */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 50px;
+}
+
+/* 제목과 업로드 날짜를 동영상 아래로 정렬 */
+.video-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;  /* 제목과 버튼을 양 끝으로 정렬 */
+  width: 640px;
+  text-align: left;
+  margin-top: 20px;
+}
+
+.video-title {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin: 0;
+}
+
+.video-date {
+  font-size: 0.9em;
+  color: #555;
+  margin: 0;
+}
+
+/* 좋아요 / 싫어요 버튼 스타일 */
+.video-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;  /* 버튼들을 오른쪽 끝으로 배치 */
+  align-items: center;
+  margin-top: 15px;
+  width: 100%;
+}
+
+.video-actions p {
+  margin-right: 20px;
+}
+
+/* 좋아요 / 싫어요 버튼 스타일 */
+.like-button, .dislike-button {
+  margin-left: 10px;
+  background-color: gray;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.like-button:hover {
+  background-color: blue; /* 좋아요 버튼 호버 효과 */
+}
+
+.dislike-button:hover {
+  background-color: #e60000; /* 싫어요 버튼 호버 효과 */
+}
+
+/* 댓글 작성 및 리스트 스타일 */
+.list-group-item {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.list-group-item:hover {
+  background-color: #f9f9f9;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.text-muted {
+  font-size: 0.8em;
+  color: #777;
+}
+
+/* 댓글 작성 버튼 스타일 */
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+/* 사이드바 카테고리 선택 스타일 */
+.form-group {
+  margin-top: 20px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+.comment-content {
+  display: block;
+  max-width: 300px; /* 원하는 최대 너비 설정 */
+  word-wrap: break-word;  /* 길이가 넘을 때 자동 줄 바꿈 */
+  word-break: break-word; /* 긴 단어도 자동으로 줄 바꿈 */
+  overflow-wrap: break-word; /* 글자가 넘치면 자동으로 줄 바꿈 */
+}

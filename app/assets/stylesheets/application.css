@@ -20,6 +20,8 @@
 @import "home";
 @import "search";
 @import "video";
+@import "changepw";
+@import "vidieoshow";
 * {
     margin: 0px;
     box-sizing: border-box;
@@ -150,3 +152,7 @@
   height: 40px;                   /* 검색창 높이 */
 }
 
+.custom-link:hover {
+  color: inherit;
+  background-color: transparent;
+}

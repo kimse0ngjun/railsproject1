@@ -1,0 +1,25 @@
+/* app/assets/stylesheets/password_change.css */
+
+.password-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.password-form-container .col-md-6 {
+  width: 100%;
+  max-width: 500px;
+}
+
+.password-form-container .form-label {
+  font-weight: bold;
+}
+
+.password-form-container .form-control {
+  margin-bottom: 1rem;
+}
+
+.password-form-container .btn-primary {
+  width: 100%;
+}
