@@ -31,9 +31,19 @@ class Video < ApplicationRecord
 
   # 동영상 조회수 증가
   def increment_views!
-    self.increment!(:views)
+    update(views: views + 1)
+  end
+	
+  # 댓글 수 계산 (대댓글 제외)
+  def comments_count
+    comments.where(parent_id: nil).count
   end
 
+  # 전체 댓글 수 계산 (대댓글 포함)
+  def total_comments_count
+    comments.count
+  end
+	
   # 동영상 업로드 후 썸네일 생성
   after_create :generate_thumbnail
 
@@ -72,10 +82,11 @@ end
 
   # 좋아요/싫어요 카운트 업데이트 메서드
   def update_reaction_counts
-    self.likes_count = video_reactions.where(reaction_type: 1).count
-    self.dislikes_count = video_reactions.where(reaction_type: 0).count
-    save
+  self.likes_count = video_reactions.where(reaction_type: 1).count
+  self.dislikes_count = video_reactions.where(reaction_type: 0).count
+  update_columns(likes_count: likes_count, dislikes_count: dislikes_count)
   end
+
 
   # YouTube 비디오 ID 추출
   def extract_youtube_video_id(url)

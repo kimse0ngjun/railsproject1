@@ -25,6 +25,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';  // 부트스트랩 CSS 불러오
 // import $ from 'jquery';  // jQuery를 먼저 import (불필요)
 // 부트스트랩 JS는 bootstrap.bundle.min.js로 제대로 불러옴
 
+// 댓글 관련 JavaScript 파일 불러오기
+import '../video_comments';
+import "@hotwired/turbo-rails";
+import "../stylesheets/application";
+
+// video_show.js 추가
+import '../video_show';
 
 import { createPopper } from '@popperjs/core';
 
