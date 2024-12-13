@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   has_many :comments, dependent: :destroy
+  has_many :likes
+  has_many :dislikes
   # Devise 인증 관련 설정
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable

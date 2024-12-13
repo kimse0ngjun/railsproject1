@@ -13,14 +13,16 @@ Rails.application.routes.draw do
       get :search, to: "videos#search" # 검색 라우트 추가
     end
 
-    # 댓글 생성 라우트 추가
-    resources :comments, only: [:create]
+    # 댓글 생성 및 삭제 라우트 추가
+    resources :comments do
+      member do
+        patch :like, to: "comments#like"  
+        patch :dislike, to: "comments#dislike"  
+      end
+    end
   end
-  
+
   # 회원가입
   resources :mains
   resources :categories, only: [:create]
-
-  # 루트 경로
- # root 'mains#index'
 end

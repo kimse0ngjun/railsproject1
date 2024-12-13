@@ -1,4 +1,6 @@
 class Video < ApplicationRecord
+  attr_accessor :skip_update_reaction_counts
+
   has_many :comments, dependent: :destroy
   has_many :viewing_histories, dependent: :destroy
   has_many :video_reactions, dependent: :destroy
@@ -27,7 +29,7 @@ class Video < ApplicationRecord
   end
 
   # 좋아요/싫어요 카운트 업데이트
-  after_save :update_reaction_counts
+  after_save :update_reaction_counts, unless: :skip_update_reaction_counts
 
   # 동영상 조회수 증가
   def increment_views!
@@ -39,22 +41,21 @@ class Video < ApplicationRecord
 
   # 썸네일 생성 메서드
   def generate_thumbnail
-  return unless uploaded_video.attached? || video_url.present?
+    return unless uploaded_video.attached? || video_url.present?
 
-  begin
-    if video_url.include?("youtube.com")
-      video_id = extract_youtube_video_id(video_url)
-      thumbnail_url = "https://img.youtube.com/vi/#{video_id}/maxresdefault.jpg"
-      download_thumbnail(thumbnail_url)
-      self.youtube_thumbnail_url = thumbnail_url  # youtube_thumbnail_url에 썸네일 URL 저장
-    else
-      generate_local_thumbnail
+    begin
+      if video_url.include?("youtube.com")
+        video_id = youtube_video_id(video_url)
+        thumbnail_url = fetch_youtube_thumbnail(video_id)
+        download_thumbnail(thumbnail_url)
+        self.youtube_thumbnail_url = thumbnail_url  # youtube_thumbnail_url에 썸네일 URL 저장
+      else
+        generate_local_thumbnail
+      end
+    rescue => e
+      Rails.logger.error "Thumbnail generation failed: #{e.message}"
     end
-  rescue => e
-    Rails.logger.error "Thumbnail generation failed: #{e.message}"
   end
-end
-
 
   private
 
@@ -72,35 +73,45 @@ end
 
   # 좋아요/싫어요 카운트 업데이트 메서드
   def update_reaction_counts
-    self.likes_count = video_reactions.where(reaction_type: 1).count
-    self.dislikes_count = video_reactions.where(reaction_type: 0).count
-    save
+    # 좋아요/싫어요 카운트가 변경되었을 경우에만 save를 호출
+    new_likes_count = video_reactions.where(reaction_type: 1).count
+    new_dislikes_count = video_reactions.where(reaction_type: 0).count
+
+    if self.likes_count != new_likes_count || self.dislikes_count != new_dislikes_count
+      self.likes_count = new_likes_count
+      self.dislikes_count = new_dislikes_count
+      self.skip_update_reaction_counts = true  # 무한 루프 방지
+      save
+    end
   end
 
   # YouTube 비디오 ID 추출
-  def extract_youtube_video_id(url)
-    url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube|youtu|youtube-nocookie)\.(?:com\/(?:[^\/]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/)[1]
+  def youtube_video_id(url)
+    match = url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube|youtu|youtube-nocookie)\.(?:com\/(?:[^\/]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/)
+    match ? match[1] : nil
+  end
+
+  # YouTube Data API를 사용해 비디오 썸네일을 가져오는 메서드
+  def fetch_youtube_thumbnail(video_id)
+    api_key = ENV['AIzaSyC0lhBN_7Bh37SnCwjREK5trFe4slO08Us']
+    url = "https://www.googleapis.com/youtube/v3/videos?id=#{video_id}&key=#{api_key}&part=snippet"
+    uri = URI.parse(url)
+    response = Net::HTTP.get(uri)
+    data = JSON.parse(response)
+
+    if data["items"].any?
+      thumbnail_url = data["items"].first["snippet"]["thumbnails"]["high"]["url"]
+      return thumbnail_url
+    else
+      raise "비디오 정보를 가져오는 데 실패했습니다."
+    end
   end
 
   # 썸네일을 다운로드하여 ActiveStorage에 첨부
   def download_thumbnail(thumbnail_url)
     image = URI.open(thumbnail_url)
     thumbnail_image.attach(io: image, filename: 'thumbnail.jpg', content_type: 'image/jpg')
-  end
-
-  # 로컬 비디오 파일에서 썸네일을 생성
-  def generate_local_thumbnail
-    video_path = Rails.root.join("tmp", "uploads", uploaded_video.filename.to_s)
-    File.open(video_path, 'wb') do |file|
-      file.write(uploaded_video.download)
-    end
-
-    thumbnail_path = Rails.root.join("tmp", "thumbnail.jpg")
-    system("ffmpeg -i #{video_path} -ss 00:00:01 -vframes 1 #{thumbnail_path}")
-
-    thumbnail_image.attach(io: File.open(thumbnail_path), filename: 'thumbnail.jpg', content_type: 'image/jpeg')
-
-    File.delete(video_path)
-    File.delete(thumbnail_path)
+  rescue => e
+    Rails.logger.error "썸네일 다운로드 실패: #{e.message}"
   end
 end

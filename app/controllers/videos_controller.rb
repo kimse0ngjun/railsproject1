@@ -1,5 +1,5 @@
 class VideosController < ApplicationController
-  before_action :set_video, only: [:show, :edit, :update, :destroy, :like, :dislike]
+  before_action :set_video, only: [:show, :edit, :update, :destroy]
   skip_before_action :authenticate_user!, only: [:search, :index, :new, :show] 
 
   # 영상 목록
@@ -9,7 +9,6 @@ class VideosController < ApplicationController
 
   # 영상 상세보기
   def show
-	@video = Video.find(params[:id])
 	# 조회수 증가
   	@video.increment_views!
 	# 댓글 목록 불러오기
@@ -37,7 +36,10 @@ class VideosController < ApplicationController
      render :new
     end
   end
-
+	
+  def increment_views!
+   with_lock { increment!(:views) }
+  end
 
 
   # 영상 수정 폼
@@ -79,11 +81,11 @@ class VideosController < ApplicationController
 
   # set_video 메소드 정의
   def set_video
-    @video = Video.find_by(id: params[:id])
-    unless @video
-      redirect_to videos_path, alert: "영상이 존재하지 않습니다."
-    end
+   if params[:id].present?
+    @video = Video.find(params[:id])
   end
+end
+
 
   # video_params 메소드 정의
   def video_params
